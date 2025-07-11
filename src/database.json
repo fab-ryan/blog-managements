@@ -1,0 +1,9 @@
+{
+    "blogs": [{
+        "id": 1,
+        "title": "jhjkhhkh",
+        "author": "Node",
+        "isPublished": false,
+        "description": "Any output from this script is prefixed with [nodemon], otherwise all output from your application, errors included, will be echoed out as expected.You can also pass the inspect flag to node through the command line as you would normally: "
+    }]
+}

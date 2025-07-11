@@ -1,0 +1,37 @@
+{
+  "name": "blog_management",
+  "version": "1.0.0",
+  "description": "blog Management",
+  "keywords": [
+    "blog"
+  ],
+  "homepage": "https://github.com/fab-ryan/blog-managements#readme",
+  "bugs": {
+    "url": "https://github.com/fab-ryan/blog-managements/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fab-ryan/blog-managements.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.ts",
+    "build": "tsc",
+    "start": "node ./dist/server.js"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "dotenv": "^17.2.0",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "joi": "^17.13.3",
+    "ts-node": "^10.9.2"
+  }
+}
