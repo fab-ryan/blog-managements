@@ -1,15 +1,15 @@
 import { ResponseService } from "../utils/response";
-import { GetAllBlogs, interfaceAddBlog } from '../types/blogInterface'
-import { db } from "../utils/helper";
+import { BlogInterface, GetAllBlogs, interfaceAddBlog } from '../types/blogInterface'
+import { blogModel } from "../models/blogModal";
 import { Request, Response } from 'express'
-import Joi from "joi";
-import { AddBlogSchema } from "../schemas/blogSchema";
-const getAllBlogs = (req: Request, res: Response) => {
+import { generateSlug } from "../utils/helper";
+const getAllBlogs = async(req: Request, res: Response) => {
     try {
-        const blogs = db;
-        console.log(req)
-        ResponseService<GetAllBlogs>({
-            data: JSON.parse(blogs),
+        const blogs =await  blogModel.find();
+        console.log(blogs)
+        
+        ResponseService({
+            data: blogs,
             status: 200,
             success: true,
             res
@@ -22,22 +22,29 @@ const getAllBlogs = (req: Request, res: Response) => {
 interface IRequestBlog extends Request {
     body: interfaceAddBlog
 }
-const createBlog = (req: IRequestBlog, res: Response) => {
+const createBlog = async(req: IRequestBlog, res: Response) => {
     try {
-        // const { title, description, author, isPublished } = req.body
-        // const { error } = AddBlogSchema.validate({
-        //     title, description, author, isPublished
-        // })
-        // if (error)
-        //     ResponseService({
-        //         data: error,
-        //         status: 400,
-        //         success: false,
-        //         res
-        //     })
+        const { title, description, author,content, isPublished } = req.body
+        const blog = new blogModel({
+            title,
+            description,
+            content,
+            slug:generateSlug(title),
+            author,
+            isPublished,
+            createdAt:new Date()
+        })
+     await  blog.save();
+        ResponseService({
+            data: blog,
+            success: true,
+            message: "Saved well",
+            status: 201,
+            res
+        })
 
     } catch (error) {
-
+console.log(error)
     }
 }
 
