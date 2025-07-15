@@ -1,6 +1,7 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
 import mongoose from 'mongoose';
 import { config } from 'dotenv'
+import bcrypt from "bcryptjs";
 config()
 const uri = "mongodb+srv://<db_username>:<db_password>@cluster0.h8zcdmw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const db_url = (): string => {
@@ -33,3 +34,8 @@ run().catch(console.dir);
 export const generateSlug = (title: string): string => {
     return title.replace(' ', '-')
 }
+
+export const hashPassword = async(password: string): Promise<string> => {
+    return await bcrypt.hash(password,10)
+}
+
