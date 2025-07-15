@@ -6,3 +6,7 @@ export const AddBlogSchema = joi.object({
     isPublished: joi.boolean().required(),
     content:joi.string()
 })
+
+export const IdValidationSchema = joi.object({
+    id:joi.string().min(24)
+})

@@ -1,14 +1,29 @@
 import mongoose, {model,Schema} from "mongoose"
 import { BlogInterface } from "../types/blogInterface"
-const blogModelSchema = new Schema <BlogInterface>({
+interface BlogSchemaInterface{
+    slug: string
+    title: string
+    author: string
+    content: string
+    isPublished: boolean
+    description: string
+    createdAt: NativeDate
+    updatedAt: NativeDate
+    deletedAt: null | string | undefined
+}
+const blogModelSchema = new Schema<BlogSchemaInterface> ({
     title: String,
-    slug:String,
+    slug: String,
     description: String,
     content: String,
     author: String,
     isPublished: Boolean,
     createdAt: Date,
-    updatedAt: Date,
+    updatedAt: {
+        type: Date,
+        default: new Date(),
+        unique:true
+    },
     deletedAt:Date
 })
-export const blogModel =  model<BlogInterface>("blogs", blogModelSchema)
+export const blogModel =  model<BlogSchemaInterface>("blogs", blogModelSchema)

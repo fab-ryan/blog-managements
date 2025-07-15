@@ -3,6 +3,7 @@ import { BlogInterface, GetAllBlogs, interfaceAddBlog } from '../types/blogInter
 import { blogModel } from "../models/blogModal";
 import { Request, Response } from 'express'
 import { generateSlug } from "../utils/helper";
+import { ObjectId } from "mongodb";
 const getAllBlogs = async(req: Request, res: Response) => {
     try {
         const blogs =await  blogModel.find();
@@ -47,5 +48,40 @@ const createBlog = async(req: IRequestBlog, res: Response) => {
 console.log(error)
     }
 }
+interface GetBlogByIdRequestInterface extends Request{
+    params: {
+        id:string
+    }
+}
+const getABlog = async (req: GetBlogByIdRequestInterface, res: Response) => {
+    try {
+        const { id } = req.params
+        const blog = await blogModel.findOne({
+            _id: new ObjectId(id),
+        })
+        if (!blog) {
+            ResponseService({
+                status: 404,
+                success: false,
+                message: "Blog not Found",
+                res
+            })
+        }
+        ResponseService({
+            data: blog,
+            res,
+            message:"Blog Fetch successfuly"
+        })
+    } catch (error) {
+        const { message,stack } = (error as Error)
+        ResponseService({
+            res,
+            data:stack,
+            message,
+            status: 500,
+            success:false
+        })
+    }
+}
 
-    export { getAllBlogs,createBlog }
+    export { getAllBlogs,createBlog,getABlog }
