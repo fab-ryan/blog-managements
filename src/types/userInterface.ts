@@ -9,7 +9,14 @@ export interface UserInterface {
 export interface CreateUserRequest extends Request{
     body: UserInterface
 }
+export interface LoginUserRequest extends Request{
+    body: {
+        email: string,
+        password:string
+    }
+}
 export interface UserControllerImplementation {
     createUser(req: CreateUserRequest, res: Response):void
     getAllUsers(req: Request, res: Response): void
+    login(req:LoginUserRequest,res:Response):void
 }

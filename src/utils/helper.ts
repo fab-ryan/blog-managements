@@ -2,6 +2,7 @@ import { MongoClient, ServerApiVersion } from 'mongodb'
 import mongoose from 'mongoose';
 import { config } from 'dotenv'
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken'
 config()
 const uri = "mongodb+srv://<db_username>:<db_password>@cluster0.h8zcdmw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const db_url = (): string => {
@@ -38,4 +39,17 @@ export const generateSlug = (title: string): string => {
 export const hashPassword = async(password: string): Promise<string> => {
     return await bcrypt.hash(password,10)
 }
+export const isPasswordMatch = async(plainPassword: string, hashedPassword:string):Promise<boolean> => {
+    const ismatch = await bcrypt.compare(plainPassword, hashedPassword)
+    return ismatch
+}
+export const secretkey = process.env.JWT_SECRET || 'secret'
 
+export const generateToken = ({ _id, email }: {_id:string,email:string
+}):string => {
+    return jwt.sign({ _id, email }, secretkey, {
+        expiresIn:'15min'
+    })
+}
+
+// Login - return access token how do we generate token jsonwebtokennpm i jsonwebtoken
