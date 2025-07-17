@@ -10,10 +10,10 @@ interface jwtPayloadExtra extends jwt.JwtPayload {
     _id: string,
     email: string
 }
-export interface RequestedUser extends Request {
+export interface AuthRequest extends Request {
     user?: userPayload
 }
-export const AuthMiddleware = (req: RequestedUser, res: Response, next: NextFunction) => {
+export const AuthMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
     try {
         const { authorization } = req.headers
         if (!authorization) ResponseService({

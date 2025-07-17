@@ -3,7 +3,7 @@ import { Response,Request } from "express";
 import { generateToken, hashPassword,isPasswordMatch } from '../utils/helper'
 import { CreateUserRequest, LoginUserRequest, UserControllerImplementation, UserInterface } from "../types/userInterface";
 import { ResponseService } from "../utils/response";
-import { RequestedUser } from "../middleware/authMiddleware";
+import { AuthRequest } from "../middleware/authMiddleware";
 import { ObjectId } from "mongoose";
 
 export class UserController implements UserControllerImplementation {
@@ -50,7 +50,7 @@ export class UserController implements UserControllerImplementation {
     }
     }
     
-    public async getAllUsers(req: RequestedUser, res: Response){
+    public async getAllUsers(req: AuthRequest, res: Response){
     try {
         const _id = req?.user?._id as string
         const user = await UserModel.findOne({

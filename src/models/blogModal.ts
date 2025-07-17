@@ -1,9 +1,10 @@
 import mongoose, {model,Schema} from "mongoose"
 import { BlogInterface } from "../types/blogInterface"
+
 interface BlogSchemaInterface{
     slug: string
     title: string
-    author: string
+    author: { type: typeof mongoose.Types.ObjectId; ref: string; }
     content: string
     isPublished: boolean
     description: string
@@ -16,7 +17,10 @@ const blogModelSchema = new Schema<BlogSchemaInterface> ({
     slug: String,
     description: String,
     content: String,
-    author: String,
+    author: {
+        type:mongoose.Types.ObjectId,
+        ref: 'Users'
+    },
     isPublished: Boolean,
     createdAt: Date,
     updatedAt: {
