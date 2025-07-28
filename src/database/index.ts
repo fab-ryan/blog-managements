@@ -9,19 +9,15 @@ interface ConfigInterface {
     host: string;
 }
 
-const dbConnection = () => {
+export const dbConnection = () => {
     const db_config = databaseConfig() as ConfigInterface
     const sequelize = new Sequelize({
         ...db_config,
         dialect: 'postgres',
-        
-    })
-    sequelize.authenticate().then(() => {
-        console.log("databasee Connected")
     })
     return sequelize
-
 }
+
 const models = AllModal(dbConnection())
 
 Object.values(models).forEach(model => {

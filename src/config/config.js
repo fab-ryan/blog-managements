@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 dotenv.config()
 const getPrefix = () => {
-  var env = process.env.NODE_ENV;
+  var env = process.env.ENV;
   if (!env) {
     return env = 'DEV'
   }
@@ -10,7 +10,6 @@ const getPrefix = () => {
 
 const databaseConfig = () => {
   const env = getPrefix();
-  console.log(process.env[`${env}_USERNAME`])
   return {
     username: process.env[`${env}_USERNAME`] || '',
     database: process.env[`${env}_DATABASE`] || '',

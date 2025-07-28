@@ -18,19 +18,30 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.ts",
+    "test": "npm run undo-migration  && npm run migration && npm run seed && jest --detectOpenHandles",
+    "dev": "nodemon index.ts",
     "build": "tsc",
     "start": "node ./dist/server.js",
-    "migration": "sequelize-cli db:migrate"
+    "migration": "sequelize-cli db:migrate",
+    "undo-migration": "sequelize-cli db:migrate:undo:all ",
+    "seed": "sequelize-cli  db:seed:all"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-typescript": "^7.27.1",
+    "@jest/globals": "^30.0.5",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/supertest": "^6.0.3",
+    "babel-jest": "^30.0.5",
     "babel-register": "^6.26.0",
     "dotenv": "^17.2.0",
+    "jest": "^30.0.5",
     "nodemon": "^3.1.10",
     "sequelize-cli": "^6.6.3",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.0",
     "typescript": "^5.8.3"
   },
   "dependencies": {
@@ -44,6 +55,7 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
     "ts-node": "^10.9.2",
+    "uuid": "^11.1.0",
     "zod": "^4.0.5"
   }
 }

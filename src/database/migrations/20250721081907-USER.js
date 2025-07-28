@@ -8,7 +8,7 @@ module.exports = {
      *
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-    //  */await queryInterface.addColumn()
+    */
     await queryInterface.createTable('users',
       {
         id: {
@@ -44,13 +44,7 @@ module.exports = {
           allowNull: true,
 
         },
-        likes: {
-          type: Sequelize.UUID,
-          references: {
-            model: 'Likes',
-            key:'id'
-          }
-        }
+
 
       }
     )

@@ -84,7 +84,6 @@ export class UserController implements UserControllerImplementation {
                 },
                 // include:['']
             })
-            console.log(">>>>>>>>", user?.dataValues.password)
             if (!user) {
                 ResponseService({
                     data: null,
