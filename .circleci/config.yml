@@ -12,3 +12,13 @@ jobs:
           root: ~/project
           paths:
             - .
+
+workflows:
+  build_and_test: # this can be any name you choose
+    jobs:
+      - build_and_test: # this must match the job name above
+          filters:
+            branches:
+              only:
+                - main # this must match the branch you want to run the job on
+
