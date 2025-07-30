@@ -7,6 +7,7 @@ interface ConfigInterface {
     database: string;
     port: number;
     host: string;
+    ssl?: boolean
 }
 const getPrefix = () => {
     var env = process.env.ENV;
