@@ -16,7 +16,8 @@ const databaseConfig = () => {
     password: process.env[`${env}_PASSWORD`] || '',
     host: process.env[`${env}_HOST`] || '',
     port: process.env[`${env}_PORT`] || 5432,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    ssl: process.env[`${env}_SSL`] || false
 
   }
 }
