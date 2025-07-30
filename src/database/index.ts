@@ -8,6 +8,13 @@ interface ConfigInterface {
     port: number;
     host: string;
 }
+const getPrefix = () => {
+    var env = process.env.ENV;
+    if (!env) {
+        return env = 'DEV'
+    }
+    return env
+}
 
 export const dbConnection = () => {
     const db_config = databaseConfig() as ConfigInterface
